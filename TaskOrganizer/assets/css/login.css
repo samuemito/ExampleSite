@@ -1,0 +1,67 @@
+body {
+  background: #f0f0f5 !important;
+}
+
+.container-content {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+#container-login {
+  width: 45%;
+  margin: 0 50px 0 50px;
+  border-radius: 5px;
+}
+
+#container-login input {
+  width: 65%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  height: 45px;
+  border-radius: 5px;
+  padding: 0 5px;
+  outline: 0;
+}
+
+.logo-initial {
+  width: 45%;
+}
+
+.container-list-avatar {
+  width: 100%;
+  display: flex;
+}
+
+#modalOptions {
+  width: 100%;
+}
+
+#modalOptions .modal-dialog {
+  width: 80%;
+  padding: 15px;
+}
+
+.container-list-avatar label {
+  width: 64px;
+  height: 64px;
+  border-radius: 25%;
+  border: 1px solid #333;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: .2s all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  background-size: 64px;
+  background-position: center;
+}
+
+.container-list-avatar label:hover {
+  box-shadow: 0 0 2px #333;
+}
+
+.selected-avatar {
+  border: 2px solid #1aa12c !important;
+}

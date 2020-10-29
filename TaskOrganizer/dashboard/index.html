@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/global.css" >
+  <link rel="stylesheet" href="../assets/css/home.css" >
+  <link rel="shortcut icon" href="../assets/images/logo.png" type="image/x-icon">
+  <title>Home - TaskOrganizer</title>
+</head>
+<body>
+  
+  <div class="w-100">
+    <header class="banner">
+      <form>
+        <input type="file" id="img" name="img" accept="image/*">
+        <label
+          for="img"
+          class="user-icon"
+          id="user-icon"
+        >
+          <img
+            src="../assets/images/camera.png"
+            class="camera"
+          />
+        </label>
+      </form>
+      <p id="username" class="username">------ ------ <span class="notation" id="quantity-points">-</span></p>
+    </header>
+    <ul class="menu">
+      <li class="actived"><a>Tarefas</a></li>
+      <li><a href="/dashboard/top">Top</a></li>
+      <li id="options" data-toggle="modal" data-target="#modalOptions"><a href="#">Definições</a></li>
+      <li class="logout" onclick="logout()"><a>Sair</a></li>
+    </ul>
+    <div id="addNewTask" data-toggle="modal" data-target="#modalExemplo" class="card send-task">+</div>
+
+    <div class="options">
+      <div onclick="renderTasks(false)" id="waiting" class="text-danger option">A fazer <span id="quantity-task">-</span></div>
+      <div onclick="renderTasks(true)" id="closed" class="text-success option">Concluídas <span id="quantity-task-completed">-</span></div>
+    </div>
+
+    <div class="center" id="container-tasks">
+    </div>
+    <div class="border-custom"></div>
+    <footer class="footer-card">
+      <div class="credits">
+        <p class="credits-title">Desenvolvido por »</p>
+        <ul class="containers-credits">
+          <li class="credits-user">Bruno teodoro</li>
+          <li class="credits-user">Hugo Belmonte</li>
+          <li class="credits-user">Leandro Ferreira</li>
+          <li class="credits-user">Samuel Pereira</li>
+        </ul>
+      </div>
+      <div class="container-infos">
+        <img
+          src="../assets/images/logo.png"
+          alt="Logo"
+          class="logo-footer"
+        />
+        <h3>TaskOrganizer</h3>
+      </div>
+      <img
+        src="../assets/images/banner_etec.png"
+        class="etec"
+      />
+    </footer>
+    <div id="container_options">
+      <div class="modal fade" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Definições pessoal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="file" id="avatar_option_input" name="avatar_option_input" accept="image/*" style="display: none;">
+
+              <div class="container-list-avatar">
+                <label onclick="avatarClick(this)" class="avatar-option" id="dog" data-url="https://task.smcodes.tk/assets/images/dog.jpeg" style="background-image: url('../assets/images/dog.jpeg')"></label>
+                <label onclick="avatarClick(this)" class="avatar-option" id="rabbit" data-url="https://task.smcodes.tk/assets/images/rabbit_cenoure.jpeg" style="background-image: url('../assets/images/rabbit_cenoure.jpeg')"></label>
+                <label onclick="avatarClick(this)" class="avatar-option" id="monkey" data-url="https://task.smcodes.tk/assets/images/monkey.jpeg" style="background-image: url('../assets/images/monkey.jpeg')"></label>
+                <label
+                  for="avatar_option_input"
+                  id="avatar-option"
+                >+</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary" id="save">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="models">
+    </div>
+    <form id="add-new-task">
+      <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><input type="text" name="matter_title" placeholder="Matéria da tarefa" /></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="col-md-5 mb-3">
+                  <label for="validationDefault01">Título da tarefa <span style="font-family: sans-serif;" class="badge badge-danger">Obrigatório</span></label>
+                  <input name="task_title" type="text" class="form-control" id="validationDefault01" placeholder="Digite aqui o título da tarefa" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-9 mb-3">
+                  <label for="validationTextarea">Descrição (opcional)</label>
+                  <textarea name="description" class="form-control " id="validationTextarea" placeholder="Digite aqui a descrição da tarefa, podendo conter as instruções da mesma."></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-5 mb-3">
+                  <label for="validationDefault01">Data de vencimento <span style="font-family: sans-serif;" class="badge badge-danger">Obrigatório</span></label>
+                  <input name="due_date" type="date" class="form-control" id="validationDefault01" placeholder="Digite aqui a data de vencimento" required>
+                </div>
+                <div class="col-md-5 mb-3">
+                  <label for="validationDefault01">Horário de vencimento <span style="font-family: sans-serif;" class="badge badge-danger">Obrigatório</span></label>
+                  <input name="due_hour" type="time" class="form-control" id="validationDefault01" placeholder="Digite aqui o horário de vencimento" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Adicionar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="../assets/js/axios.min.js"></script>
+  <script src="../assets/js/home.js"></script>
+  <script>
+    async function loadInfos() {
+      try {
+        const token = localStorage.getItem('token')
+
+        const {data: user} = await axios.get('https://redeheroes-bot-v2.herokuapp.com/user', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        if (!token || !user) {
+          localStorage.clear()
+          window.location.replace('/')
+        } else {
+          const componentUsername = document.getElementById('username')
+          const user_icon = document.getElementById('user-icon')
+          componentUsername.innerHTML = `${user.username} <span class="notation" id="quantity-points">${user.points}</span>`
+          user_icon.style.backgroundImage = `url('${user.avatar_url}')`
+        }
+      } catch (err) {
+        localStorage.clear()
+        window.location.replace('/')
+      }
+    }
+
+    loadInfos()
+  </script>
+  <script src="../assets/js/moment.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
+  <script src="../assets/js/geral.js"></script>
+</body>
+</html>
